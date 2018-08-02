@@ -15,7 +15,7 @@ $(function()
 		$('#spelare').html(event.data.spelare);
 	//	$('#ptbl').html(event.data.text);
 		
-        buf.find('table').append("<tr class=\"heading\"><th>ID</th><th>Name</th></tr>");
+        buf.find('table').append("<tr class=\"heading\"><th>ID</th><th>Namn</th></tr>");
         if (item.meta && item.meta == 'close')
         {
             document.getElementById("ptbl").innerHTML = "";

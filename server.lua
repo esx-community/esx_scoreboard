@@ -39,7 +39,7 @@ function CountEMS()
 		if xPlayer.job.name == 'realestateagent' then
 			MaklareConnected = MaklareConnected + 1
 		end	
-		if xPlayer.job.name == 'forsaljare' then
+		if xPlayer.job.name == 'unicorn' then
 			IcaConnected = IcaConnected + 1
 		end
 	end
