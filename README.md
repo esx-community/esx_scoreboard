@@ -1,2 +1,11 @@
-# Stadus_Scoreboard
-En snabb edit för designen och funktionalitetens skull. Små fixar som att ha Unicorn jobbet istället för "ica". Fixat så att båda sidor av "jobs" baren är lika långa. Lagt till samma font på alla typer av texter i scriptet så att det inte är 5 olika. Tagit bort bannern / logo. Bytt ut vissa ikoner till andra som i mitt tycke passade bättre. Översatt till svenska...
+# LifeGoals version av Stadus_Scoreboard
+
+* En snabb edit för designen och funktionalitetens skull
+* Bytt färger
+* Bytt opacitet
+* Unicorn jobbet istället för Ica jobbet i jobb baren
+* Båda sidor av jobb baren är lika långa, förut var ena längre än den andra
+* Tagit bort bannern med logon
+* Bytt ut ett flertal olika ikoner för jobben
+* Lagt till RP namn istället för steam namn i scoreboarden
+* Översatt till svenska
