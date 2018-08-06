@@ -55,3 +55,23 @@ cb(EMSConnected, PoliceConnected, TaxiConnected, MekConnected, BilConnected, Mak
 
 end)
 
+ESX.RegisterServerCallback('scoreboard:getIdentity', function(source, cb, player)
+  local identifier = GetPlayerIdentifiers(player)[1]
+  local result = MySQL.Sync.fetchAll("SELECT * FROM users WHERE identifier = @identifier", {['@identifier'] = identifier})
+  if result[1] ~= nil then
+    local identity = result[1]
+
+    local data = {
+      identifier = identity['identifier'],
+      firstname = identity['firstname'],
+      lastname = identity['lastname'],
+      dateofbirth = identity['dateofbirth'],
+      sex = identity['sex'],
+      height = identity['height']
+      
+    }
+    cb(data)
+  else
+    cb(nil)
+  end
+end)

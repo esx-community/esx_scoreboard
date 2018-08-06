@@ -29,9 +29,11 @@ end
                 for _, i in ipairs(ptable) do
                     local wantedLevel = GetPlayerWantedLevel(i)
                     r, g, b = GetPlayerRgbColour(i)
-                    table.insert(players, 
-                    '<tr style=\"color: rgb(' .. 255 .. ', ' .. 255 .. ', ' .. 255 .. ')\"><td>' .. GetPlayerServerId(i) .. '</td><td>' .. GetPlayerName(i) .. '</td></tr>'
-                    )
+                    ESX.TriggerServerCallback("scoreboard:getIdentity", function(name) 
+                        table.insert(players, 
+                        '<tr style=\"color: rgb(' .. 255 .. ', ' .. 255 .. ', ' .. 255 .. ')\"><td>' .. GetPlayerServerId(i) .. '</td><td>' .. name.firstname .. " " .. name.lastname .. '</td></tr>'
+                        )
+                    end, GetPlayerServerId(i))
                 end
 				if Faketimer >= 2 then
 				ESX.TriggerServerCallback('stadusrp_getJobsOnline', function(ems, police, taxi, mek, bil, maklare, ica, spelare)
