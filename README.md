@@ -9,3 +9,6 @@
 * Bytt ut ett flertal olika ikoner för jobben
 * Lagt till RP namn istället för steam namn i scoreboarden
 * Översatt till svenska
+
+Detta är en edit av Stadus scoreboard. 
+Originalet hittar ni här: https://github.com/Stadus/Stadus_Scoreboard
