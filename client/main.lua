@@ -20,7 +20,7 @@ Citizen.CreateThread(function()
 	end
 
 	Citizen.Wait(2000)
-	ESX.TriggerServerCallback('esx_scoreboard:getPlayers', function(connectedPlayers)
+	ESX.TriggerServerCallback('scoreboard:getPlayers', function(connectedPlayers)
 		UpdatePlayerTable(connectedPlayers)
 	end)
 end)
@@ -36,31 +36,24 @@ Citizen.CreateThread(function()
 	})
 end)
 
-RegisterNetEvent('esx_scoreboard:updateConnectedPlayers')
-AddEventHandler('esx_scoreboard:updateConnectedPlayers', function(connectedPlayers)
+RegisterNetEvent('scoreboard:updateConnectedPlayers')
+AddEventHandler('scoreboard:updateConnectedPlayers', function(connectedPlayers)
 	UpdatePlayerTable(connectedPlayers)
 end)
 
-RegisterNetEvent('esx_scoreboard:updatePlayerJobs')
-AddEventHandler('esx_scoreboard:updatePlayerJobs', function(playerJobs)
+RegisterNetEvent('scoreboard:updatePlayerJobs')
+AddEventHandler('scoreboard:updatePlayerJobs', function(playerJobs)
 	SendNUIMessage({
 		action = 'updatePlayerJobs',
 		jobs   = playerJobs
 	})
 end)
 
-RegisterNetEvent('esx_scoreboard:updatePing')
-AddEventHandler('esx_scoreboard:updatePing', function(connectedPlayers)
+RegisterNetEvent('scoreboard:updatePing')
+AddEventHandler('scoreboard:updatePing', function(connectedPlayers)
 	SendNUIMessage({
 		action  = 'updatePing',
 		players = connectedPlayers
-	})
-end)
-
-RegisterNetEvent('esx_scoreboard:toggleID')
-AddEventHandler('esx_scoreboard:toggleID', function(state)
-	SendNUIMessage({
-		action  = 'toggleID'
 	})
 end)
 
@@ -101,22 +94,6 @@ Citizen.CreateThread(function()
 	end
 end)
 
--- Close scoreboard when game is paused
-Citizen.CreateThread(function()
-	while true do
-		Citizen.Wait(300)
-
-		if IsPauseMenuActive() and not IsPaused then
-			IsPaused = true
-			SendNUIMessage({
-				action  = 'close'
-			})
-		elseif not IsPauseMenuActive() and IsPaused then
-			IsPaused = false
-		end
-	end
-end)
-
 function ToggleScoreBoard()
 	SendNUIMessage({
 		action = 'toggle'
@@ -141,3 +118,10 @@ Citizen.CreateThread(function()
 		})
 	end
 end)
+
+RegisterNetEvent('scoreboard:toggleID')
+ AddEventHandler('scoreboard:toggleID', function(state)
+ 	SendNUIMessage({
+ 		action  = 'toggleID'
+ 	})
+ end)

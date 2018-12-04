@@ -1,34 +1,30 @@
 var visable = false;
-	idVisable = true;
+idVisable = true;
 
 $(function () {
 	window.addEventListener('message', function (event) {
 
 		switch (event.data.action) {
 			case 'toggle':
+
 				if (visable) {
-					$('#wrap').fadeOut();
-				} else {
-					$('#wrap').fadeIn();
+ 					$('#wrap').fadeOut();
+ 				} else {
+ 					$('#wrap').fadeIn();
 				}
 
 				visable = !visable;
 				break;
 
-			case 'close':
-				$('#wrap').fadeOut();
-				visable = false;
-				break;
+				case 'toggleID':
+ 				if (idVisable) {
+ 					$('td:nth-child(2),th:nth-child(2)').hide();
+ 				} else {
+ 					$('td:nth-child(2),th:nth-child(2)').show();
+ 				}
 
-			case 'toggleID':
-				if (idVisable) {
-					$('td:nth-child(2),th:nth-child(2)').hide();
-				} else {
-					$('td:nth-child(2),th:nth-child(2)').show();
-				}
-
-				idVisable = !idVisable;
-				break;
+ 				idVisable = !idVisable;
+ 				break;
 
 			case 'updatePlayerJobs':
 				var json = JSON.parse(event.data.jobs);
@@ -40,7 +36,8 @@ $(function () {
 				$('#taxi').html(json.taxi);
 				$('#mechanic').html(json.mechanic);
 				$('#cardealer').html(json.cardealer);
-				$('#estate').html(json.estate);
+				$('#bennys').html(json.bennys);
+				$('#unicorn').html(json.unicorn);
 				break;
 
 			case 'updatePlayerList':
@@ -71,7 +68,7 @@ $(function () {
 				break;
 
 			default:
-				console.log('esx_scoreboard: unknown action!');
+				console.log('scoreboard: unknown action!');
 				break;
 		}
 	}, false);
@@ -90,7 +87,7 @@ function applyPingColor() {
 			}
 
 			$(this).css('color', color);
-			$(this).html(ping + " <span style='color:white;'>ms</span>");
+			$(this).html(ping + "<span style='color:white;'>ms</span>");
 		});
 
 	});
@@ -98,30 +95,28 @@ function applyPingColor() {
 
 // Todo: not the best code
 function updatePing(players) {
-	jQuery.each(players, function (i, v) {
-		if (v != null) {
-			$('#playerlist tr:not(.heading)').each(function () {
-				$(this).find('td:nth-child(2):contains(' + v.id + ')').each(function () {
-					$(this).parent().find('td').eq(2).html(v.ping);
-				});
+	jQuery.each(players, function (i, val) {
+		$('#playerlist tr:not(.heading)').each(function () {
+			$(this).find('td:nth-child(2):contains(' + val.id + ')').each(function () {
+				$(this).parent().find('td').eq(2).html(val.ping);
 			});
-		}
+		});
 	});
 }
 
 function sortPlayerList() {
-	var table = $('#playerlist'),
-		rows = $('tr:not(.heading)', table);
+ 	var table = $('#playerlist'),
+ 		rows = $('tr:not(.heading)', table);
 
-	rows.sort(function(a, b) {
+ 	rows.sort(function(a, b) {
 
-		var keyA = $('td', a).eq(1).html();
-		var keyB = $('td', b).eq(1).html();
+ 		var keyA = $('td', a).eq(1).html();
+ 		var keyB = $('td', b).eq(1).html();
 
-		return (keyA - keyB);
-	});
+ 		return (keyA - keyB);
+ 	});
 
-	rows.each(function(index, row) {
-		table.append(row);
-	});
-}
+ 	rows.each(function(index, row) {
+ 		table.append(row);
+ 	});
+ }
