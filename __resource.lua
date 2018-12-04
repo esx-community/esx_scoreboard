@@ -1,29 +1,20 @@
 resource_manifest_version '44febabe-d386-4d18-afbe-5e627f4af937'
 
-description 'Scoreboard (nameless)'
+description 'ESX Scoreboard'
 
 version '1.0.0'
 
-ui_page 'html/scoreboard.html'
-
-client_script 'client.lua'
-
 server_scripts {
 	'@mysql-async/lib/MySQL.lua',
-	'server.lua'
+	'server/main.lua'
 }
+
+client_script 'client/main.lua'
+
+ui_page 'html/scoreboard.html'
 
 files {
 	'html/scoreboard.html',
-
 	'html/style.css',
-
-	'html/listener.js',
-
-	'html/res/futurastd-medium.css',
-	'html/res/futurastd-medium.eot',
-	'html/res/futurastd-medium.woff',
-	'html/res/futurastd-medium.ttf',
-	'html/res/opensans-light.ttf',
-	'html/res/futurastd-medium.svg'
+	'html/listener.js'
 }

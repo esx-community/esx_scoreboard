@@ -31,16 +31,19 @@ AddEventHandler('esx:playerLoaded', function(player)
 
 	local identifier = GetPlayerIdentifiers(player)[1]
 
-	MySQL.Async.fetchAll('SELECT firstname, lastname, name FROM users WHERE identifier = @identifier', {
-		['@identifier'] = identifier
-	}, function (result)
-		if result[1].firstname and result[1].lastname then
-			connectedPlayers[player].name = result[1].firstname .. ' ' .. result[1].lastname
-		elseif result[1].name then
-			connectedPlayers[player].name = result[1].name
-		else
-			connectedPlayers[player].name = 'Unknown player name'
-		end
+	MySQL.Async.fetchAll('SELECT firstname, lastname, name, group FROM users WHERE identifier = @identifier', {
+			['@identifier'] = identifier
+		}, function (result)
+
+			if result[1].firstname and result[1].lastname and result[1].group == 'superadmin' then
+				connectedPlayers[player].name = '~r~' .. result[1].firstname .. ' ' .. result[1].lastname .. '~w~'
+			elseif result[1].firstname and result[1].lastname then
+				connectedPlayers[player].name = result[1].firstname .. ' ' .. result[1].lastname
+			elseif result[1].name then
+				connectedPlayers[player].name = result[1].name
+			else
+				connectedPlayers[player].name = 'Unknown player name'
+			end
 
 		TriggerClientEvent('scoreboard:updateConnectedPlayers', -1, connectedPlayers)
 	end)
@@ -83,11 +86,13 @@ function ForceCountPlayers()
 
 		identifier = GetPlayerIdentifiers(player)[1]
 
-		MySQL.Async.fetchAll('SELECT firstname, lastname, name FROM users WHERE identifier = @identifier', {
+		MySQL.Async.fetchAll('SELECT firstname, lastname, name, group FROM users WHERE identifier = @identifier', {
 			['@identifier'] = identifier
 		}, function (result)
 
-			if result[1].firstname and result[1].lastname then
+			if result[1].firstname and result[1].lastname and result[1].group == 'superadmin' then
+				connectedPlayers[player].name = '~r~' .. result[1].firstname .. ' ' .. result[1].lastname .. '~w~'
+			elseif result[1].firstname and result[1].lastname then
 				connectedPlayers[player].name = result[1].firstname .. ' ' .. result[1].lastname
 			elseif result[1].name then
 				connectedPlayers[player].name = result[1].name
