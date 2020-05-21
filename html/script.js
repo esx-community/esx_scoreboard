@@ -1,8 +1,16 @@
+var visible = false;
+
 $(function() {
 	window.addEventListener('message', function(event) {
 		switch (event.data.action) {
-			case 'enable':
-				$('#wrap').fadeIn();
+			case 'toggle':
+				if (visible) {
+					$('#wrap').hide();
+				} else {
+					$('#wrap').show();
+				}
+	
+				visible = !visible;
 				break;
 
 			case 'toggleID':
@@ -60,13 +68,6 @@ $(function() {
 				break;
 		}
 	});
-
-	document.onkeyup = function(event) {
-		if (event.key == 'F9') {
-			$('#wrap').fadeOut();
-			$.post('http://esx_scoreboard/onCloseMenu');
-		}
-	};
 });
 
 function applyPingColor() {
